@@ -24,7 +24,7 @@ public class MakingEnemies : MonoBehaviour
 
     private IEnumerator CreateEnemies()
     {
-	    float spawnTime = 2f;	
+	float spawnTime = 2f;	
 
         while (true)
         {
