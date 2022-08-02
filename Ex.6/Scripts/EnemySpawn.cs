@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] private Transform _spawn;
-    [SerializeField] private GameObject _enemy;
+    [SerializeField] private Enemy _enemy;
 
     private Transform[] _spawnPoints;
     private WaitForSeconds _spawnTime;
@@ -28,7 +28,7 @@ public class EnemySpawn : MonoBehaviour
         while (true)
         {
             Transform targetSpawn = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-            GameObject enemy = Instantiate(_enemy, targetSpawn.position, Quaternion.identity);
+            var enemy = Instantiate(_enemy, targetSpawn.position, Quaternion.identity);
 
             yield return _spawnTime;
         }
