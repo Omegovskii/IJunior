@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform _spawn;
     [SerializeField] private Enemy _enemy;
@@ -20,10 +20,10 @@ public class EnemySpawn : MonoBehaviour
             _spawnPoints[i] = _spawn.GetChild(i);
         }
 
-        StartCoroutine(CreateEnemies());
+        StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator CreateEnemies()
+    private IEnumerator SpawnEnemies()
     {
         while (true)
         {
