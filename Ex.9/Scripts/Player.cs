@@ -1,53 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Slider HealthBar;
+    [SerializeField] private float _health;
 
-    private float HealthPoint = 100f;
+    private float _maxHealth = 100f;
+
+    public UnityAction ChangingHealth;
+    public float Health => _health;
 
     public void TakeDamage(float damage)
     {
-        if(HealthPoint > HealthBar.minValue)
+        if (_health > 0)
         {
-            HealthPoint -= damage;
-        }
-        
-        if(HealthPoint < HealthBar.minValue)
-        {
-            HealthPoint = 0;
+            _health -= damage;
         }
 
-        StartCoroutine(UpdateHealthBar());
+        ChangingHealth?.Invoke();
     }
 
-    public void UseFirstAidKit(float healthPoint)
+    public void UseFirstAidKit(float health)
     {
-        if (HealthPoint < HealthBar.maxValue)
+        if (_health < _maxHealth)
         {
-            HealthPoint += healthPoint;
+            _health += health;
         }
 
-        if (HealthPoint > HealthBar.maxValue)
-        {
-            HealthPoint = 0;
-        }
-
-        StartCoroutine(UpdateHealthBar());
-    }
-
-    private IEnumerator UpdateHealthBar()
-    {
-        float speed = 7f;
-
-        while (HealthBar.value != HealthPoint)
-        {
-            HealthBar.value = Mathf.MoveTowards(HealthBar.value, HealthPoint, speed*Time.deltaTime);
-
-            yield return null;
-        }
+        ChangingHealth?.Invoke();
     }
 }
