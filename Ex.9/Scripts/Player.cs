@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
             _health -= damage;
         }
 
+        _health = Mathf.Clamp(_health, 0, _maxHealth);
+
         ChangingHealth?.Invoke();
     }
 
@@ -26,6 +28,8 @@ public class Player : MonoBehaviour
         {
             _health += health;
         }
+
+        _health = Mathf.Clamp(_health, 0, _maxHealth);
 
         ChangingHealth?.Invoke();
     }
