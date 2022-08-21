@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 1350022429}
   - component: {fileID: 1350022428}
   m_Layer: 5
-  m_Name: UseFirstAidKitButton
+  m_Name: HealButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1808596740}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: UseFirstAidKit
+        m_MethodName: Heal
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

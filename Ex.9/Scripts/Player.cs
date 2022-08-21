@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     private float _maxHealth = 100f;
 
-    public UnityAction ChangingHealth;
+    public event UnityAction ChangedHealth;
     public float Health => _health;
 
     public void TakeDamage(float damage)
@@ -19,10 +19,10 @@ public class Player : MonoBehaviour
 
         _health = Mathf.Clamp(_health, 0, _maxHealth);
 
-        ChangingHealth?.Invoke();
+        ChangedHealth?.Invoke();
     }
 
-    public void UseFirstAidKit(float health)
+    public void Heal(float health)
     {
         if (_health < _maxHealth)
         {
@@ -31,6 +31,6 @@ public class Player : MonoBehaviour
 
         _health = Mathf.Clamp(_health, 0, _maxHealth);
 
-        ChangingHealth?.Invoke();
+        ChangedHealth?.Invoke();
     }
 }
