@@ -10,6 +10,7 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private bool _isGrounded;
+    private const string IsRunning = "isRunning";
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class PlayerMover : MonoBehaviour
         if (Input.GetButton("Horizontal"))
             Run();
         else
-            _animator.SetBool("isRunning", false);
+            _animator.SetBool(IsRunning, false);
  
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             Jump();
@@ -36,7 +37,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Run()
     {
-        _animator.SetBool("isRunning", true);
+        _animator.SetBool(IsRunning, true);
 
         Vector3 direction = transform.right * Input.GetAxis("Horizontal");
 
@@ -52,7 +53,9 @@ public class PlayerMover : MonoBehaviour
 
     private void CheckOnGround()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+        float radiusCircle = 0.5f;
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radiusCircle);
         _isGrounded = colliders.Length > 1;
     }
 }
