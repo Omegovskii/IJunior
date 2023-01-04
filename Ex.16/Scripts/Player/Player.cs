@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _delayBetweenShots;
     [SerializeField] private Weapon _weapon;
 
-    private float _elapsedTimeBetweenShots;
-    
+    private WaitForSeconds _delay; 
+
     public int Money { get; private set; }
     public int Level { get; private set; }
 
@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public void DecreaseDelayBetweenShots(int value)
     {
         _delayBetweenShots -= (float)value / 100;
+        _delay = new WaitForSeconds(_delayBetweenShots);
         CooldownChanged?.Invoke();
     }
 
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
-        _mover.ResetPlayer();
+        _mover.Reset();
     }
 
     public void LevelUp()
@@ -53,14 +54,19 @@ public class Player : MonoBehaviour
         MoneyChanged?.Invoke(Money);
     }
 
-    private void Update()
+    private void Start()
     {
-        _elapsedTimeBetweenShots += Time.deltaTime;
+        _delay = new WaitForSeconds(_delayBetweenShots);
+        StartCoroutine(Shoot());
+    }
 
-        if (_elapsedTimeBetweenShots > _delayBetweenShots)
+    private IEnumerator Shoot()
+    {
+        while (true)
         {
             _weapon.Shoot(_shootPoint);
-            _elapsedTimeBetweenShots = 0;
-        } 
+
+            yield return _delay;
+        }
     }
 }

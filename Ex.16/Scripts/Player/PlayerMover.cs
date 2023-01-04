@@ -35,7 +35,7 @@ public class PlayerMover : MonoBehaviour
             _player.position = _rightBorder.position;
     }
 
-    public void ResetPlayer()
+    public void Reset()
     {
         _player.position = _startPosition;
     }

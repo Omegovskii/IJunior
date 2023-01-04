@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     public void IncreaseHealth()
     {
-        int RandomHelth = Random.Range(10,25);
+        int RandomHelth = Random.Range(1,3);
         _maxHealth += RandomHelth;
         _minHealth += RandomHelth;
     }

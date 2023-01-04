@@ -372,9 +372,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minHealth: 10
-  _maxHealth: 25
-  _viewHealth: {fileID: 2600267662282592750}
+  _maxHealth: 15
   _reward: 5
+  _viewHealth: {fileID: 2600267662282592750}
 --- !u!114 &8639442255334445639
 MonoBehaviour:
   m_ObjectHideFlags: 0
